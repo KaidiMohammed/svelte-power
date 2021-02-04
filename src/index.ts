@@ -1,5 +1,4 @@
-/* Add JavaScript code here! */
-console.log("Hello Rockstar :D");
+//@ts-ignore
 import App from "./App.svelte";
 
 let app = new App({
