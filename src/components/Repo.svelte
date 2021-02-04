@@ -6,7 +6,7 @@
   export let repo: IRepoProps;
 </script>
 
-<Card>
+<Card class="Card">
   <CardBody style=" margin-left: 2% !important;">
     <div class="repo-animation">
       <div>
@@ -46,5 +46,8 @@
     to {
       transform: scale(1.06);
     }
+  }
+  .Card {
+    border-radius: 25%;
   }
 </style>

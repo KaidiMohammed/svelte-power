@@ -1,9 +1,10 @@
 export default async function getRepos(repoLang: string) {
+  console.log(repoLang);
   repoLang = repoLang.replace(/\s/g, "");
   const response = await fetch(
     "https://api.github.com/search/repositories?q=language=" +
       repoLang +
-      "&s=stars"
+      "&sort=stars&order=desc"
   );
   if (response.ok) {
     return response.json();

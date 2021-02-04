@@ -1,13 +1,15 @@
 <!-- App.svelte -->
 <script>
-  import { Button, Row, Spinner, Col, Card } from "sveltestrap";
-  import Dog from "./components/Dog.svelte";
+  import { onMount } from "svelte";
+  import { Row, Spinner, Col } from "sveltestrap";
 
+  import Dog from "./components/Dog.svelte";
   import Repo from "./components/Repo.svelte";
 
   import getRepos from "./services/repos";
 
-  let repoLang = "java";
+  let repoLang = "";
+  let repoLangInput;
   let reposMap = new Map();
   let isSearching = false;
 
@@ -23,34 +25,33 @@
     });
   };
 
-  const handleInputChange = () => {
-    isSearching = true;
-  };
+  $: setTimeout(() => {
+    getReposByLang();
+  }, 3000);
 
-  getReposByLang();
+  onMount(() => repoLangInput.focus());
 </script>
 
 <div class="App" style="overflow: hidden;padding:5px">
-  <div style="display:flex;flex-direction:row">
+  <div style="">
     <Dog /><img
       src="/logo_github.png"
-      class="App-logo"
+      class="github-logo"
       alt="logo"
-      style="margin-left:40%"
+      style="margin-left:10%"
     />
   </div>
 
   <br />
-  <div style="display:flex;flex-direction:row;position:relative;left:43%">
+  <div style="display:flex;flex-direction:row;position:relative;left:38%">
     <form on:submit|preventDefault={getReposByLang}>
       <input
+        bind:this={repoLangInput}
         bind:value={repoLang}
         class="form-control"
-        on:input={handleInputChange}
+        placeholder="Search a repo"
+        style="font-size:25px"
       />
-      <Button type="submit" class="btn btn-info mb-4 mt-1 ml-4"
-        >Search for the repos</Button
-      >
     </form>
   </div>
 
@@ -58,7 +59,9 @@
     {#if !isSearching}
       <Row>
         {#each reposMap.get(repoLang) ?? [] as repo}
-          <Col class="mt-1 col-md-2 col-xs-12 col-s-12 col-sm-12  ">
+          <Col
+            class="mt-1 col-md-12 col-xs-12 col-s-12 col-sm-12 col-lg-6 col-xl-3  "
+          >
             <Repo {repo} />
           </Col>
         {/each}
@@ -70,13 +73,12 @@
 </div>
 
 <style>
-  .App-logo {
+  .github-logo {
     height: 36vmin;
     pointer-events: none;
-    margin-bottom: 3rem;
-    animation: App-logo-pulse infinite 1.6s ease-in-out alternate;
+    animation: github-logo-pulse infinite 1.6s ease-in-out alternate;
   }
-  @keyframes App-logo-pulse {
+  @keyframes github-logo-pulse {
     from {
       transform: scale(1);
     }

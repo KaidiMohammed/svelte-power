@@ -321,6 +321,7 @@
 <style>
   .sausage-dog-animation {
     height: 20rem;
+    margin-left: 20%;
     max-height: 80vh;
     max-width: 80vw;
   }
