@@ -7,20 +7,34 @@
 </script>
 
 <Card>
-  <CardBody>
+  <CardBody style=" margin-left: 2% !important;">
     <div class="repo-animation">
-      <a href={repo.html_url} target="_blanc">
-        {repo.name} <br />
-      </a>
-      {repo.stargazers_count} stars
+      <div>
+        <a href={repo.html_url} target="_blanc">
+          {repo.name}
+          <br />
+          <img
+            src={repo.owner.avatar_url}
+            href={repo.html_url}
+            width="40px"
+            alt="star github"
+          />
+          by :
+          {repo.owner.login}
+          <br />
+
+          <div style="color:gold;font-weight:bold">
+            {repo.stargazers_count}
+            <img src="../star.png" width="18px" alt="star github" />
+          </div>
+        </a>
+      </div>
     </div>
   </CardBody>
 </Card>
 
 <style>
   .repo-animation {
-    height: 7vmin;
-    margin-bottom: 3rem;
     cursor: pointer;
     animation: repo-animation-pulse infinite 1.6s ease-in-out alternate;
   }
@@ -32,13 +46,5 @@
     to {
       transform: scale(1.06);
     }
-  }
-  .repo-animation:hover {
-    background-color: aqua;
-    color: brown;
-  }
-
-  a {
-    color: unset;
   }
 </style>

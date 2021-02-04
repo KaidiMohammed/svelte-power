@@ -1,6 +1,7 @@
 <!-- App.svelte -->
 <script>
   import { Button, Row, Spinner, Col, Card } from "sveltestrap";
+  import Dog from "./components/Dog.svelte";
 
   import Repo from "./components/Repo.svelte";
 
@@ -31,7 +32,7 @@
 
 <div class="App" style="overflow: hidden;padding:5px">
   <div style="display:flex;flex-direction:row">
-    <img
+    <Dog /><img
       src="/logo_github.png"
       class="App-logo"
       alt="logo"
@@ -47,17 +48,17 @@
         class="form-control"
         on:input={handleInputChange}
       />
-      <Button type="submit" active class="btn btn-info mb-4 mt-1 ml-4"
+      <Button type="submit" class="btn btn-info mb-4 mt-1 ml-4"
         >Search for the repos</Button
       >
     </form>
   </div>
 
-  <Card style="padding:10px;border:0px;background-color:skyblue">
+  <div style="padding:10px;border:0px;">
     {#if !isSearching}
       <Row>
         {#each reposMap.get(repoLang) ?? [] as repo}
-          <Col class="ml-1 mt-1 mr-1">
+          <Col class="mt-1 col-md-2 col-xs-12 col-s-12 col-sm-12  ">
             <Repo {repo} />
           </Col>
         {/each}
@@ -65,7 +66,7 @@
     {:else}
       <Spinner />
     {/if}
-  </Card>
+  </div>
 </div>
 
 <style>
