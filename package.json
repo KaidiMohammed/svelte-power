@@ -1,8 +1,7 @@
 {
   "scripts": {
     "start": "snowpack dev",
-    "build": "snowpack build",
-    "test": "echo \"This template does not include a test runner by default.\" && exit 1"
+    "build": "snowpack build"
   },
   "devDependencies": {
     "@snowpack/plugin-svelte": "^3.5.2",
@@ -11,8 +10,8 @@
     "typescript": "^4.0.0"
   },
   "dependencies": {
-    "node-sass": "^5.0.0",
     "svelte": "^3.32.1",
+    "svelte-infinite-scroll": "^1.5.2",
     "sveltestrap": "^3.13.0"
   }
 }

@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { IRepoProps } from "src/types";
 
-  import { Card, CardBody, Button } from "sveltestrap";
+  import { Card, CardBody } from "sveltestrap";
 
   export let repo: IRepoProps;
 </script>
@@ -17,7 +17,7 @@
             src={repo.owner.avatar_url}
             href={repo.html_url}
             width="40px"
-            alt="star github"
+            alt="stars github"
           />
           by :
           {repo.owner.login}
@@ -25,7 +25,7 @@
 
           <div style="color:gold;font-weight:bold">
             {repo.stargazers_count}
-            <img src="../star.png" width="18px" alt="star github" />
+            <img src="../star.svg" width="18px" alt="star github" />
           </div>
         </a>
       </div>
