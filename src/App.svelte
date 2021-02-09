@@ -22,18 +22,15 @@
   const getReposByLang = async () => {
     if (!reposMap.has(repoLang)) page = 0;
     isSearching = true;
-    if (reposMap.has(repoLang) && !page === 0) {
-      isSearching = false;
-      return;
-    }
-    await getRepos(repoLang, page).then((res) => {
-      if (reposMap.has(repoLang)) {
-        reposMap.set(repoLang, [...reposMap.get(repoLang), ...res.items]);
-      } else reposMap.set(repoLang, res.items);
-      isSearching = false;
-    });
+    await getRepos(repoLang, (reposMap.get(repoLang)?.length ?? 0) / 30).then(
+      (res) => {
+        if (reposMap.has(repoLang)) {
+          reposMap.set(repoLang, [...reposMap.get(repoLang), ...res.items]);
+        } else reposMap.set(repoLang, res.items);
+        isSearching = false;
+      }
+    );
     listRepo = reposMap.get(repoLang);
-    if (page === 0) page = 1;
   };
 
   // actions to do when the component is mounted first time
@@ -55,18 +52,17 @@
   </div>
 
   <br />
-  <div style="display:flex;flex-direction:row;position:relative;left:32%">
+  <div
+    style="display:flex;flex-direction:row;position:relative;justify-content:center"
+  >
     <form on:submit|preventDefault={getReposByLang}>
-      <label for="repoLang" style="font-size:25px">
-        Search for repos of a prog language
-      </label>
       <input
         bind:this={repoLangInput}
         bind:value={repoLang}
         name="repoLang"
         class="form-control"
-        placeholder="Ex: java, then hit Enter Or Go"
-        style="font-size:25px;display:initial !important; width:50%"
+        placeholder="Ex: java, then hit Go"
+        style="font-size:25px;display:initial !important; width:80%"
       />
       <Button
         class="btn btn-info mt-1"
@@ -96,7 +92,6 @@
     {/if}
   </div>
 </div>
-{page}
 <InfiniteScroll
   threshold={1}
   window

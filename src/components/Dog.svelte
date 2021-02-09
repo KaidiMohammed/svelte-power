@@ -321,11 +321,16 @@
 <style>
   .sausage-dog-animation {
     height: 20rem;
-    margin-left: 29%;
+    margin-left: 35%;
     max-height: 31vh;
     max-width: 60vw;
   }
 
+  @media screen and (min-width: 0px) and (max-width: 450px) {
+    .sausage-dog-animation {
+      margin-left: 8%;
+    }
+  }
   .ear,
   .closed-eye,
   .lean,
