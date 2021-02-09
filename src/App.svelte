@@ -22,14 +22,16 @@
   const getReposByLang = async () => {
     if (!reposMap.has(repoLang)) page = 0;
     isSearching = true;
-    await getRepos(repoLang, (reposMap.get(repoLang)?.length ?? 0) / 30).then(
-      (res) => {
+    await getRepos(repoLang, (reposMap.get(repoLang)?.length ?? 0) / 30)
+      .then((res) => {
         if (reposMap.has(repoLang)) {
           reposMap.set(repoLang, [...reposMap.get(repoLang), ...res.items]);
         } else reposMap.set(repoLang, res.items);
         isSearching = false;
-      }
-    );
+      })
+      .catch(() => {
+        isSearching = false;
+      });
     listRepo = reposMap.get(repoLang);
   };
 
@@ -67,6 +69,7 @@
       <Button
         class="btn btn-info mt-1"
         style="calc(1.5em + .75rem + 2px);font-size:25px;margin-bottom:15px;background-color:#0b22d3"
+        disabled={isSearching}
         type="submit">Go</Button
       >
     </form>
